@@ -8,7 +8,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "extract-schema": "npx sanity@latest schema extract --enforce-required-fields",
+    "extract-schema": "source .env && npx sanity@latest schema extract --enforce-required-fields",
     "typegen": "npm run extract-schema && npx sanity@latest typegen generate"
   },
   "dependencies": {
