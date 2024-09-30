@@ -7,17 +7,21 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "extract-schema": "npx sanity@latest schema extract --enforce-required-fields",
+    "typegen": "npm run extract-schema && npx sanity@latest typegen generate"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
     "@astrojs/react": "^3.6.2",
     "@sanity/astro": "^3.1.6",
     "@sanity/client": "^6.22.0",
+    "@sanity/image-url": "^1.0.2",
     "@sanity/visual-editing": "^2.1.10",
     "@types/react": "^18.3.9",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.15.9",
+    "marked": "^14.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sanity": "^3.58.0",

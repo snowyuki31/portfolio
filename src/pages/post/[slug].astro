@@ -1,0 +1,30 @@
+---
+import { sanityClient } from 'sanity:client';
+import { marked } from 'marked';
+import imageUrlBuilder from '@sanity/image-url'
+
+export const getStaticPaths = async () => {
+  const results = await sanityClient.fetch(`*[_type == "post"]`);
+
+  const paths = results.map((result: any) => ({
+    params: { slug: result.slug.current },
+  }));
+
+  return paths;
+};
+
+const { slug } = Astro.params;
+
+const post = await sanityClient.fetch(`*[_type == "post" && slug.current == $slug][0]`, { slug });
+const body = marked.parse(post.body);
+
+const builder = imageUrlBuilder(sanityClient);
+---
+
+<meta charset="utf-8" />
+<h1>A post about {post.title}</h1>
+<p>created at {post._createdAt}</p>
+<img src={builder.image(post.mainImage).width(200).url()} alt={post.mainImage.alt} />
+<article set:html={body} />
+
+
