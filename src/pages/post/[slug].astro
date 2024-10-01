@@ -1,8 +1,9 @@
 ---
-import { sanityClient } from 'sanity:client';
-import { marked } from 'marked';
-import imageUrlBuilder from '@sanity/image-url'
-import { fetchPost, fetchPosts } from '../../adapters/post';
+import { sanityClient } from "sanity:client";
+import { marked } from "marked";
+import imageUrlBuilder from "@sanity/image-url";
+import { fetchPost, fetchPosts } from "../../adapters/post";
+import GlobalLayout from "@/layouts/GlobalLayout";
 
 export const getStaticPaths = async () => {
   const results = await fetchPosts();
@@ -29,10 +30,12 @@ const body = marked.parse(post.body);
 const builder = imageUrlBuilder(sanityClient);
 ---
 
-<meta charset="utf-8" />
-<h1>A post about {post.title}</h1>
-<p>created at {post._createdAt}</p>
-<img src={builder.image(post.mainImage!).width(200).url()} alt={post.mainImage!.alt} />
-<article set:html={body} />
-
-
+<GlobalLayout>
+  <h1>A post about {post.title}</h1>
+  <p>created at {post._createdAt}</p>
+  <img
+    src={builder.image(post.mainImage!).width(200).url()}
+    alt={post.mainImage!.alt}
+  />
+  <article set:html={body} />
+</GlobalLayout>

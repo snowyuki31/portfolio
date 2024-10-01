@@ -6,6 +6,8 @@ import { defineConfig } from "astro/config";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 
+import tailwind from "@astrojs/tailwind";
+
 const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
   process.env.NODE_ENV ?? "",
   process.cwd(),
@@ -23,5 +25,8 @@ export default defineConfig({
       studioBasePath: "/studio",
     }),
     react(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
   ],
 });
