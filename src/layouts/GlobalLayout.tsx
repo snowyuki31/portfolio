@@ -1,5 +1,6 @@
 import React from "react";
-import "@/styles/globals.css";
+import "@/styles/global.css";
+import { Header } from "@/components/Header";
 
 type GlobalLayoutProps = {
   children: React.ReactNode;
@@ -41,7 +42,10 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={image} />
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 };
